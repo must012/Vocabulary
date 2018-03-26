@@ -153,8 +153,8 @@ public class testWord extends JPanel{
 					
 				//문제를 뜻을 물어보고 한자/히라가나를 입력
 					for(int i = 0; i<20; i++) {
-						if(table1.getValueAt(i, 1) == null) table1.setValueAt("", i, 1);
-						if(table1.getValueAt(i, 2) == null) table1.setValueAt("", i, 2);
+						if(table1.getValueAt(i, 1) == null) table1.setValueAt("-", i, 1);
+						if(table1.getValueAt(i, 2) == null) table1.setValueAt("-", i, 2);
 						if((table1.getValueAt(i, 1).equals(table2.getValueAt(i, 0))) && (table1.getValueAt(i, 2).equals(table2.getValueAt(i, 1))))
 							table1.setValueAt("O", i, 3);
 						else

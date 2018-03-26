@@ -12,13 +12,10 @@ import javax.swing.text.html.parser.DTD;
 
 public class MainDB {
 	
-	
 	String selectQuery = 
 		"SELECT CN, JP, KR1, KR2, KR3 FROM WORDPAD WHERE NOTE = ?";
 	String countQuery = 
 		"SELECT COUNT(*) FROM WORDPAD WHERE NOTE = ?";
-	
-	int row;
 	
 	public static Connection connect() {
 		String userID = "s1301204";
@@ -53,6 +50,8 @@ public class MainDB {
 	public int insertWord(DTO dto){
 		int resultCheck = 0;
 		String inputQuery = "INSERT INTO WORDPAD (CN, JP, KR1, KR2, KR3, NOTE, ID) VALUES (?,?,?,?,?,?,?)";
+		int row;
+		
 		Connection con = connect();
 		Statement stmt = null;
 		PreparedStatement rtmt = null;
@@ -104,11 +103,8 @@ public class MainDB {
 
 	public ArrayList<DTO> selectWord(int noteNullCheck, DTO inputDto) {
 		Connection con = connect();
-		Statement stmt = null;
 		PreparedStatement rtmt = null;
 		ResultSet rs = null;
-		
-		String [][] table = null;
 		
 		ArrayList <DTO> list = new ArrayList<DTO>();
 		DTO dto = null;
@@ -146,6 +142,9 @@ public class MainDB {
 			if(rtmt != null) {try {rtmt.close(); }
 			catch(Exception e) {e.getMessage(); }
 			}
+			if(con != null) {try {con.close(); }
+			catch(Exception e) {e.getMessage(); }
+			}
 		}
 		return list;
 		
@@ -155,12 +154,12 @@ public class MainDB {
 		Random rd = new Random();
 		
 		int num = 0;
+		int row;
 		Connection con = connect();
 		Statement stmt = null;
 		PreparedStatement rtmt = null;
 		ResultSet rs = null;
 		
-		String [][] word = new String[20][5];
 		boolean checkOut = false;
 
 		ArrayList <Integer> numForNote = new ArrayList<Integer>();
@@ -277,7 +276,7 @@ public class MainDB {
 				redundancy.add(num);
 				checkOut = false;
 				list.add(dto);
-			}
+				}
 			}
 		
 		}catch(SQLException e) {
